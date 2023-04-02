@@ -1,29 +1,44 @@
 <template>
   <div class="gallery-container">
     <div class="gallery-wrapper">
-      <div class="main-image">
-        <img :src="mainImageUrl" :alt="mainImageAlt" />
-      </div>
+      <MainImage
+        :image-id="activeImageId"
+        :image-url="mainImageUrl"
+        :image-alt="mainImageAlt"
+        @click.native="showModal"
+      />
       <div class="thumbnails">
-        <div v-for="image in images" :key="image.id" class="thumbnail">
-          <ThumbnailImage
-            :image-id="image.id"
-            :image-url="image.url"
-            :image-alt="image.alt"
-            @setActiveImage="setActiveImage"
-          />
-        </div>
+        <ThumbnailImage
+          v-for="image in images"
+          :key="image.id"
+          :image-id="image.id"
+          :image-url="image.url"
+          :image-alt="image.alt"
+          @setActiveImage="setActiveImage"
+        />
       </div>
     </div>
+    <ModalGallery
+      v-if="isModalShown"
+      :images="images"
+      :main-image-id="activeImageId"
+      :main-image-url="mainImageUrl"
+      :main-image-alt="mainImageAlt"
+      @setActiveImage="setActiveImage"
+      @closeModal="closeModal"
+    />
   </div>
 </template>
 
 <script>
 import ThumbnailImage from "./gallery/ThumbnailImage.vue";
+import MainImage from "./gallery/MainImage.vue";
+import ModalGallery from "./modals/ModalGallery.vue";
 export default {
-  components: { ThumbnailImage },
+  components: { ThumbnailImage, MainImage, ModalGallery },
   data() {
     return {
+      isModalShown: false,
       activeImageId: 1,
       images: [
         {
@@ -71,6 +86,12 @@ export default {
     setActiveImage(id) {
       this.activeImageId = id;
     },
+    showModal() {
+      this.isModalShown = true;
+    },
+    closeModal() {
+      this.isModalShown = false;
+    },
   },
 };
 </script>
@@ -96,10 +117,6 @@ export default {
   row-gap: 1rem;
 }
 
-.main-image img {
-  width: 100%;
-}
-
 .thumbnails {
   margin: 0;
   padding: 0;
@@ -109,19 +126,5 @@ export default {
   justify-content: space-between;
   align-items: flex-start;
   gap: 0.5rem;
-}
-
-.thumbnail {
-  display: inline-block;
-  width: 150px;
-}
-
-.thumbnail img {
-  max-width: 100%;
-}
-
-.thumbnail img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 </style>

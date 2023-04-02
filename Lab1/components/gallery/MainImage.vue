@@ -1,13 +1,12 @@
 <template>
-  <div class="thumbnail">
-    <img :src="imageUrl" :alt="imageAlt" @click="setImageActive(imageId)" />
+  <div class="main-image">
+    <img :src="imageUrl" :alt="imageAlt" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "ThumbnailImage",
-  emits: ["setActiveImage"],
+  name: "MainImage",
   props: {
     imageId: {
       type: Number,
@@ -22,27 +21,19 @@ export default {
       required: true,
     },
   },
-  methods: {
-    setImageActive(id) {
-      this.$emit("setActiveImage", id);
-    },
-  },
 };
 </script>
 
 <style scoped>
-.thumbnail {
-  display: inline-block;
-  width: 150px;
+.main-image {
   overflow: hidden;
 }
-
-.thumbnail img {
-  max-width: 100%;
+.main-image img {
+  width: 100%;
   transition: transform 0.5s ease;
 }
 
-.thumbnail img:hover {
+.main-image img:hover {
   transform: scale(1.3);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
