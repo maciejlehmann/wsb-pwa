@@ -4,6 +4,7 @@
     <NuxtLink to="/">Home</NuxtLink>
     <NuxtLink to="/about">About</NuxtLink>
     <NuxtLink to="/gallery">Gallery</NuxtLink>
+    <NuxtLink to="/nasa">Nasa</NuxtLink>
   </div>
 </template>
 
