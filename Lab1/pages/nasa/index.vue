@@ -10,10 +10,9 @@
     <div class="images-wrapper">
       <template v-for="value in dataArr">
         <template v-for="(link, index) in value.links">
-          <div v-if="index === 0" class="single-img-wrapper" :key="index">
+          <div v-if="index === 0" class="single-img-wrapper" :key="link.href">
             <img
               :src="link.href"
-              :data-index="index"
               @click="nasaStore.openModal(link.href)"
             />
           </div>

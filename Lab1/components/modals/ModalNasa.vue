@@ -27,29 +27,6 @@ export default {
   },
   components: { Icon },
   name: "ModalNasa",
-  props: {
-    images: {
-      type: Array,
-      required: true,
-    },
-    mainImageId: {
-      type: Number,
-      required: true,
-    },
-    mainImageUrl: {
-      type: String,
-      required: true,
-    },
-    mainImageAlt: {
-      type: String,
-      required: true,
-    },
-  },
-  methods: {
-    closeModal() {
-      this.$emit("closeModal");
-    },
-  },
 };
 </script>
 
@@ -119,12 +96,6 @@ export default {
   height: 100%;
 }
 
-.active-thumbnail {
-  border: 0.125rem solid orange;
-  border-radius: 0.25rem;
-}
-
-.change-image-button,
 .close-modal-button {
   margin: 0;
   padding: 0;
@@ -132,16 +103,6 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-}
-
-.change-image-button.disabled {
-  color: #555;
-  pointer-events: none;
-  cursor: default;
-}
-.change-image-button:hover {
-  color: orange;
-  cursor: pointer;
 }
 
 .close-modal-button:hover {
